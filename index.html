@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos digitales</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Search & Tag Filter UI */
+        .controls-container {
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-wrapper {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            outline: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        #searchBar:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            max-width: 800px;
+        }
+
+        .tag-filter {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .tag-filter:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tag-filter.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Grid System */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card Component */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image-container {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .card-action:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        .card-action svg {
+            margin-left: 8px;
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 2.2rem; }
+            header p { font-size: 1.1rem; }
+            .repo-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Recursos digitales</h1>
+            <p>Pequeño repositorio de recursos digitales para trabajar la lectoescritura en el aula.</p>
+        </header>
+
+        <div class="controls-container">
+            <div class="search-wrapper">
+                <input type="text" id="searchBar" placeholder="Buscar por título, contenido o etiqueta...">
+            </div>
+            <div class="tag-cloud" id="tagCloud">
+                <!-- Etiquetas dinámicas -->
+            </div>
+        </div>
+
+        <main class="repo-grid" id="mainGrid">
+            <!-- Tarjetas dinámicas -->
+        </main>
+    </div>
+
+    <script>
+        const data = [
+            {
+                titulo: "GEMA \"Lectora\"",
+                descripcion: "Gema generadora de textos contextualizados y su correspondiente secuencia didáctica.",
+                enlace: "https://gemini.google.com/gem/1EJS9XtUJyS0CUE-v-LGkLON-oEC0vnSQ?usp=sharing",
+                etiquetas: ["IA", "Lectura", "Didáctica", "Gemini"],
+                imagen: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                titulo: "GEMA \"Consigna\"",
+                descripcion: "Gema generadora de consignas de escritura para el trabajo específico de la expresión escrita.",
+                enlace: "https://gemini.google.com/gem/1rYZSMx88iTcn1ABHsdFcjJobDo8m4uQi?usp=sharing",
+                etiquetas: ["Escritura", "Creatividad", "IA", "Expresión"],
+                imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                titulo: "GEMA \"Proyectos de lectura\"",
+                descripcion: "Gema experta en el diseño de proyectos para trabajar la animación a la lectura de una forma original y creativa.",
+                enlace: "https://gemini.google.com/gem/1b3K4K8tjMDFdVvfsYmjageEETSvnLFtn?usp=sharing",
+                etiquetas: ["Proyectos", "Animación", "Lectura", "Innovación"],
+                imagen: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                titulo: "Plan de Actuación",
+                descripcion: "Artículo detallado sobre cómo elaborar el plan de actuación para el trabajo de la lectura en centros educativos.",
+                enlace: "https://blogsaverroes.juntadeandalucia.es/ellocodelamochila/competencia-en-comunicacion-linguistica/el-plan-de-actuacion-para-el-trabajo-de-la-lectura/",
+                etiquetas: ["Guía", "Planificación", "Lectura", "Docencia"],
+                imagen: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+                titulo: "Plan Lector",
+                descripcion: "Documento con orientaciones oficiales y metodológicas sobre la elaboración del plan lector.",
+                enlace: "https://www.juntadeandalucia.es/educacion/portals/delegate/content/fcfd31c1-79fd-4ba0-acd5-9bbc1eb20396/Elaboración%20del%20Plan%20Lector",
+                etiquetas: ["Oficial", "Metodología", "Educación", "Lectoescritura"],
+                imagen: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=800"
+            }
+        ];
+
+        const mainGrid = document.getElementById('mainGrid');
+        const searchBar = document.getElementById('searchBar');
+        const tagCloud = document.getElementById('tagCloud');
+        
+        let activeTag = null;
+
+        /**
+         * Extrae todas las etiquetas únicas para crear el filtro
+         */
+        function initTagCloud() {
+            const allTags = new Set();
+            data.forEach(item => item.etiquetas.forEach(t => allTags.add(t)));
+            
+            tagCloud.innerHTML = '';
+            
+            // Botón "Todas"
+            const allBtn = document.createElement('div');
+            allBtn.className = 'tag-filter active';
+            allBtn.textContent = 'Todas';
+            allBtn.onclick = () => filterByTag(null, allBtn);
+            tagCloud.appendChild(allBtn);
+
+            Array.from(allTags).sort().forEach(tag => {
+                const btn = document.createElement('div');
+                btn.className = 'tag-filter';
+                btn.textContent = tag;
+                btn.onclick = () => filterByTag(tag, btn);
+                tagCloud.appendChild(btn);
+            });
+        }
+
+        /**
+         * Filtra los resultados al hacer clic en una etiqueta
+         */
+        function filterByTag(tag, element) {
+            document.querySelectorAll('.tag-filter').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            activeTag = tag;
+            searchBar.value = ''; // Limpiamos búsqueda manual al usar filtros rápidos
+            performFilter();
+        }
+
+        /**
+         * Renderiza las tarjetas
+         */
+        function renderCards(items) {
+            mainGrid.innerHTML = '';
+            if (items.length === 0) {
+                mainGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #94a3b8;">No se han encontrado recursos que coincidan.</div>`;
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('article');
+                card.className = 'card';
+                const tagsHTML = item.etiquetas.map(t => `<span class="tag">${t}</span>`).join('');
+
+                card.innerHTML = `
+                    <div class="card-image-container">
+                        <img src="${item.imagen}" alt="${item.titulo}" class="card-image" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-tags">${tagsHTML}</div>
+                        <h2 class="card-title">${item.titulo}</h2>
+                        <p class="card-description">${item.descripcion}</p>
+                        <a href="${item.enlace}" target="_blank" class="card-action">
+                            Ver Recurso
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </a>
+                    </div>
+                `;
+                mainGrid.appendChild(card);
+            });
+        }
+
+        /**
+         * Lógica combinada de filtrado (Búsqueda + Tags)
+         */
+        function performFilter() {
+            const term = searchBar.value.toLowerCase();
+            const filtered = data.filter(item => {
+                const matchesSearch = item.titulo.toLowerCase().includes(term) || 
+                                     item.descripcion.toLowerCase().includes(term) ||
+                                     item.etiquetas.some(t => t.toLowerCase().includes(term));
+                
+                const matchesTag = activeTag ? item.etiquetas.includes(activeTag) : true;
+                
+                return matchesSearch && matchesTag;
+            });
+            renderCards(filtered);
+        }
+
+        searchBar.addEventListener('input', performFilter);
+
+        window.onload = () => {
+            initTagCloud();
+            renderCards(data);
+        };
+    </script>
+</body>
+</html>
