@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recursos digitales</title>
+    <title>Recursos digitales - Repositorio v2</title>
     <style>
         :root {
             --bg-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.85);
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            --radius: 16px;
+            --accent: #0ea5e9;
+            --accent-hover: #0284c7;
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 20px;
         }
 
         * {
@@ -24,50 +24,52 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
+            background-image: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.05) 0, transparent 50%), 
+                              radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.05) 0, transparent 50%);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 2rem 1rem;
+            padding: 3rem 1.5rem;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
             margin-bottom: 1rem;
-            background: linear-gradient(to right, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         header p {
             color: var(--text-muted);
-            font-size: 1.25rem;
-            max-width: 700px;
+            font-size: 1.2rem;
+            max-width: 650px;
             margin: 0 auto;
         }
 
-        /* Search & Tag Filter UI */
-        .controls-container {
-            margin-bottom: 3rem;
+        .controls {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .search-wrapper {
+        .search-box {
             width: 100%;
             max-width: 600px;
             position: relative;
@@ -75,41 +77,42 @@
 
         #searchBar {
             width: 100%;
-            padding: 1.1rem 1.5rem;
-            border-radius: 14px;
-            border: 1px solid #e2e8f0;
+            padding: 1.2rem 1.8rem;
+            border-radius: 18px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
             outline: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            background: white;
             box-shadow: var(--shadow);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         #searchBar:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
         }
 
         .tag-cloud {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.6rem;
-            max-width: 800px;
+            gap: 0.75rem;
         }
 
         .tag-filter {
-            background: #fff;
+            background: white;
             border: 1px solid #e2e8f0;
-            color: var(--text-muted);
-            padding: 0.4rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-muted);
         }
 
         .tag-filter:hover {
+            transform: translateY(-2px);
             border-color: var(--accent);
             color: var(--accent);
         }
@@ -118,54 +121,42 @@
             background: var(--accent);
             color: white;
             border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
         }
 
-        /* Grid System */
-        .repo-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2.5rem;
         }
 
-        /* Card Component */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
-            overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            height: 100%;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-color: rgba(14, 165, 233, 0.4);
         }
 
-        .card-image-container {
+        .card-img {
+            height: 200px;
             width: 100%;
-            height: 190px;
-            overflow: hidden;
-            background: #e2e8f0;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
         }
 
-        .card:hover .card-image {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
+        .card-body {
+            padding: 1.75rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -174,228 +165,240 @@
         .card-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem;
+            gap: 0.5rem;
             margin-bottom: 1rem;
         }
 
-        .tag {
-            background: #eff6ff;
-            color: var(--accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
+        .pill {
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
         }
 
         .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 800;
             margin-bottom: 0.75rem;
             color: #0f172a;
-            line-height: 1.3;
         }
 
-        .card-description {
-            font-size: 0.95rem;
+        .card-text {
+            font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             flex-grow: 1;
         }
 
-        .card-action {
-            display: inline-flex;
+        .btn {
+            display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--accent);
+            background: #1e293b;
             color: white;
             text-decoration: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 14px;
             font-weight: 600;
-            transition: all 0.2s ease;
-            width: 100%;
+            transition: all 0.3s ease;
         }
 
-        .card-action:hover {
-            background-color: var(--accent-hover);
+        .btn:hover {
+            background: #000;
             transform: scale(1.02);
         }
 
-        .card-action svg {
-            margin-left: 8px;
+        .btn svg {
             width: 18px;
             height: 18px;
+            margin-left: 8px;
         }
 
-        @media (max-width: 640px) {
-            header h1 { font-size: 2.2rem; }
-            header p { font-size: 1.1rem; }
-            .repo-grid { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Recursos digitales</h1>
-            <p>Pequeño repositorio de recursos digitales para trabajar la lectoescritura en el aula.</p>
-        </header>
+<div class="container">
+    <header>
+        <h1>Recursos digitales</h1>
+        <p>Pequeño repositorio de recursos digitales para trabajar la lectoescritura en el aula.</p>
+    </header>
 
-        <div class="controls-container">
-            <div class="search-wrapper">
-                <input type="text" id="searchBar" placeholder="Buscar por título, contenido o etiqueta...">
-            </div>
-            <div class="tag-cloud" id="tagCloud">
-                <!-- Etiquetas dinámicas -->
-            </div>
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="searchBar" placeholder="Buscar por herramienta, descripción o categoría...">
         </div>
-
-        <main class="repo-grid" id="mainGrid">
-            <!-- Tarjetas dinámicas -->
-        </main>
+        <div class="tag-cloud" id="tagCloud">
+            <!-- Dinámico -->
+        </div>
     </div>
 
-    <script>
-        const data = [
-            {
-                titulo: "GEMA \"Lectora\"",
-                descripcion: "Gema generadora de textos contextualizados y su correspondiente secuencia didáctica.",
-                enlace: "https://gemini.google.com/gem/1EJS9XtUJyS0CUE-v-LGkLON-oEC0vnSQ?usp=sharing",
-                etiquetas: ["IA", "Lectura", "Didáctica", "Gemini"],
-                imagen: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800"
-            },
-            {
-                titulo: "GEMA \"Consigna\"",
-                descripcion: "Gema generadora de consignas de escritura para el trabajo específico de la expresión escrita.",
-                enlace: "https://gemini.google.com/gem/1rYZSMx88iTcn1ABHsdFcjJobDo8m4uQi?usp=sharing",
-                etiquetas: ["Escritura", "Creatividad", "IA", "Expresión"],
-                imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800"
-            },
-            {
-                titulo: "GEMA \"Proyectos de lectura\"",
-                descripcion: "Gema experta en el diseño de proyectos para trabajar la animación a la lectura de una forma original y creativa.",
-                enlace: "https://gemini.google.com/gem/1b3K4K8tjMDFdVvfsYmjageEETSvnLFtn?usp=sharing",
-                etiquetas: ["Proyectos", "Animación", "Lectura", "Innovación"],
-                imagen: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=800"
-            },
-            {
-                titulo: "Plan de Actuación",
-                descripcion: "Artículo detallado sobre cómo elaborar el plan de actuación para el trabajo de la lectura en centros educativos.",
-                enlace: "https://blogsaverroes.juntadeandalucia.es/ellocodelamochila/competencia-en-comunicacion-linguistica/el-plan-de-actuacion-para-el-trabajo-de-la-lectura/",
-                etiquetas: ["Guía", "Planificación", "Lectura", "Docencia"],
-                imagen: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800"
-            },
-            {
-                titulo: "Plan Lector",
-                descripcion: "Documento con orientaciones oficiales y metodológicas sobre la elaboración del plan lector.",
-                enlace: "https://www.juntadeandalucia.es/educacion/portals/delegate/content/fcfd31c1-79fd-4ba0-acd5-9bbc1eb20396/Elaboración%20del%20Plan%20Lector",
-                etiquetas: ["Oficial", "Metodología", "Educación", "Lectoescritura"],
-                imagen: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=800"
-            }
-        ];
+    <main class="grid" id="cardGrid">
+        <!-- Dinámico -->
+    </main>
+</div>
 
-        const mainGrid = document.getElementById('mainGrid');
-        const searchBar = document.getElementById('searchBar');
-        const tagCloud = document.getElementById('tagCloud');
+<script>
+    // Datos actualizados con URLs de imágenes corregidas
+    const rawData = [
+        {
+            titulo: "GEMA \"Lectora\"",
+            desc: "Gema generadora de textos contextualizados y su correspondiente secuencia didáctica.",
+            link: "https://gemini.google.com/gem/1EJS9XtUJyS0CUE-v-LGkLON-oEC0vnSQ?usp=sharing",
+            tags: ["IA", "Lectura", "Didáctica"],
+            img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=800"
+        },
+        {
+            titulo: "GEMA \"Consigna\"",
+            desc: "Gema generadora de consignas de escritura para el trabajo específico de la expresión escrita.",
+            link: "https://gemini.google.com/gem/1rYZSMx88iTcn1ABHsdFcjJobDo8m4uQi?usp=sharing",
+            tags: ["Escritura", "IA", "Creatividad"],
+            img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800"
+        },
+        {
+            titulo: "GEMA \"Proyectos audiovisuales\"",
+            desc: "Gema que te da ideas sobre proyectos audiovisuales para tu aula.",
+            link: "https://gemini.google.com/gem/1H4UOZgSkGEaOtdp_SQFEbwFJ5YvSJAzo?usp=sharing",
+            tags: ["Audiovisual", "Proyectos", "IA"],
+            img: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=800"
+        },
+        {
+            titulo: "GEMA \"Mentora de oratoria\"",
+            desc: "Gema que te proporciona ideas creativas para trabajar la oralidad en tu aula.",
+            link: "https://gemini.google.com/gem/1O9kttk074l1SD4R0iuiXv8QEMSyWJ-sl?usp=sharing",
+            tags: ["Oratoria", "Oralidad", "IA"],
+            img: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800"
+        },
+        {
+            titulo: "Gema \"Radio creativa\"",
+            desc: "Gema especialista en dar ideas para llevar la radio al aula de forma creativa y original.",
+            link: "https://gemini.google.com/gem/1nRbJNgMxuo-djND1OP7j3bx-uRxtf_iV?usp=sharing",
+            tags: ["Radio", "Podcasting", "IA"],
+            img: "https://images.unsplash.com/photo-1558403194-611308249627?q=80&w=800"
+        },
+        {
+            titulo: "Gema \"Guiones radiofónicos\"",
+            desc: "Gema especialista en la creación de escaletas para todo tipo de programas de radio.",
+            link: "https://gemini.google.com/gem/1K6gSxc-l6OHchveGW2duYeDgpUm3lu9c?usp=sharing",
+            tags: ["Radio", "Guion", "IA"],
+            img: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=800"
+        },
+        {
+            titulo: "SUNO",
+            desc: "IA especializada en la creación de música a partir de texto.",
+            link: "https://suno.com",
+            tags: ["Música", "IA Generativa"],
+            img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800"
+        },
+        {
+            titulo: "Producer.AI",
+            desc: "IA especializada en la creación de música para producciones.",
+            link: "https://www.producer.ai/",
+            tags: ["Música", "Producción", "IA"],
+            img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=800"
+        },
+        {
+            titulo: "UDIO",
+            desc: "Herramienta de IA avanzada para la generación de pistas musicales.",
+            link: "https://www.udio.com/",
+            tags: ["Música", "IA Generativa"],
+            img: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?q=80&w=800"
+        },
+        {
+            titulo: "Plan de actuación",
+            desc: "Artículo sobre cómo elaborar el plan de actuación para el trabajo de la lectura.",
+            link: "https://blogsaverroes.juntadeandalucia.es/ellocodelamochila/competencia-en-comunicacion-linguistica/el-plan-de-actuacion-para-el-trabajo-de-la-lectura/",
+            tags: ["Planificación", "Lectura", "Guía"],
+            img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800"
+        }
+    ];
+
+    const cardGrid = document.getElementById('cardGrid');
+    const searchBar = document.getElementById('searchBar');
+    const tagCloud = document.getElementById('tagCloud');
+    
+    let activeTag = null;
+
+    function renderTags() {
+        const tags = new Set();
+        rawData.forEach(item => item.tags.forEach(t => tags.add(t)));
         
-        let activeTag = null;
+        tagCloud.innerHTML = '<button class="tag-filter active" onclick="filterByTag(null, this)">Todos</button>';
+        
+        Array.from(tags).sort().forEach(tag => {
+            const btn = document.createElement('button');
+            btn.className = 'tag-filter';
+            btn.textContent = tag;
+            btn.onclick = () => filterByTag(tag, btn);
+            tagCloud.appendChild(btn);
+        });
+    }
 
-        /**
-         * Extrae todas las etiquetas únicas para crear el filtro
-         */
-        function initTagCloud() {
-            const allTags = new Set();
-            data.forEach(item => item.etiquetas.forEach(t => allTags.add(t)));
+    function filterByTag(tag, el) {
+        document.querySelectorAll('.tag-filter').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        activeTag = tag;
+        updateUI();
+    }
+
+    function updateUI() {
+        const query = searchBar.value.toLowerCase();
+        
+        const filtered = rawData.filter(item => {
+            const matchesSearch = item.titulo.toLowerCase().includes(query) || 
+                                 item.desc.toLowerCase().includes(query) ||
+                                 item.tags.some(t => t.toLowerCase().includes(query));
             
-            tagCloud.innerHTML = '';
+            const matchesTag = activeTag ? item.tags.includes(activeTag) : true;
             
-            // Botón "Todas"
-            const allBtn = document.createElement('div');
-            allBtn.className = 'tag-filter active';
-            allBtn.textContent = 'Todas';
-            allBtn.onclick = () => filterByTag(null, allBtn);
-            tagCloud.appendChild(allBtn);
+            return matchesSearch && matchesTag;
+        });
 
-            Array.from(allTags).sort().forEach(tag => {
-                const btn = document.createElement('div');
-                btn.className = 'tag-filter';
-                btn.textContent = tag;
-                btn.onclick = () => filterByTag(tag, btn);
-                tagCloud.appendChild(btn);
-            });
+        cardGrid.innerHTML = '';
+        
+        if(filtered.length === 0) {
+            cardGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:5rem; color:#94a3b8;">No se encontraron resultados para esta búsqueda.</div>';
+            return;
         }
 
-        /**
-         * Filtra los resultados al hacer clic en una etiqueta
-         */
-        function filterByTag(tag, element) {
-            document.querySelectorAll('.tag-filter').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-            activeTag = tag;
-            searchBar.value = ''; // Limpiamos búsqueda manual al usar filtros rápidos
-            performFilter();
-        }
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            // Placeholder si falla la imagen
+            const fallbackImg = "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=800";
+            
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.titulo}" class="card-img" onerror="this.onerror=null;this.src='${fallbackImg}';">
+                <div class="card-body">
+                    <div class="card-tags">${item.tags.map(t => `<span class="pill">${t}</span>`).join('')}</div>
+                    <h3 class="card-title">${item.titulo}</h3>
+                    <p class="card-text">${item.desc}</p>
+                    <a href="${item.link}" target="_blank" class="btn">
+                        Abrir Herramienta
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+            `;
+            cardGrid.appendChild(card);
+        });
+    }
 
-        /**
-         * Renderiza las tarjetas
-         */
-        function renderCards(items) {
-            mainGrid.innerHTML = '';
-            if (items.length === 0) {
-                mainGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: #94a3b8;">No se han encontrado recursos que coincidan.</div>`;
-                return;
-            }
+    searchBar.addEventListener('input', updateUI);
 
-            items.forEach(item => {
-                const card = document.createElement('article');
-                card.className = 'card';
-                const tagsHTML = item.etiquetas.map(t => `<span class="tag">${t}</span>`).join('');
+    window.onload = () => {
+        renderTags();
+        updateUI();
+    };
+</script>
 
-                card.innerHTML = `
-                    <div class="card-image-container">
-                        <img src="${item.imagen}" alt="${item.titulo}" class="card-image" loading="lazy">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-tags">${tagsHTML}</div>
-                        <h2 class="card-title">${item.titulo}</h2>
-                        <p class="card-description">${item.descripcion}</p>
-                        <a href="${item.enlace}" target="_blank" class="card-action">
-                            Ver Recurso
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                            </svg>
-                        </a>
-                    </div>
-                `;
-                mainGrid.appendChild(card);
-            });
-        }
-
-        /**
-         * Lógica combinada de filtrado (Búsqueda + Tags)
-         */
-        function performFilter() {
-            const term = searchBar.value.toLowerCase();
-            const filtered = data.filter(item => {
-                const matchesSearch = item.titulo.toLowerCase().includes(term) || 
-                                     item.descripcion.toLowerCase().includes(term) ||
-                                     item.etiquetas.some(t => t.toLowerCase().includes(term));
-                
-                const matchesTag = activeTag ? item.etiquetas.includes(activeTag) : true;
-                
-                return matchesSearch && matchesTag;
-            });
-            renderCards(filtered);
-        }
-
-        searchBar.addEventListener('input', performFilter);
-
-        window.onload = () => {
-            initTagCloud();
-            renderCards(data);
-        };
-    </script>
 </body>
 </html>
